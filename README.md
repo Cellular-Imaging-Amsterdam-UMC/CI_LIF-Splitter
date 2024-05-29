@@ -23,7 +23,7 @@ What to do with large or huge Leica LAS-X LIF files? Opening them can be a pain.
 
 ## Screenshot
 
-![CI LIF Splitter Interface](https://github.com/Cellular-Imaging-Amsterdam-UMC/CI_LIF-Splitter/blob/main/Schermafbeelding_2024-05-29_152728.png?raw=true)(./)
+![CI LIF Splitter Interface](https://github.com/Cellular-Imaging-Amsterdam-UMC/CI_LIF-Splitter/blob/main/Schermafbeelding_2024-05-29_152728.png?raw=true)
 
 ## Version
 
