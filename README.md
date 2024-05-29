@@ -43,10 +43,15 @@ What to do with large or huge Leica LAS-X LIF files? Opening them can be a pain.
 
 ## Installation
 
-To install and run the CI LIFSplitter:
+To install and run the CI LIFSplitter (Microsoft Windows Systems only):
 
-1. Download the latest release from the [source link](https://software.cellularimaging.nl).
+1. Download the latest release from the releases.
 2. Follow the installation instructions provided in the download package.
+
+## Prerequisites for running the code in MATLAB (Microsoft Windows Systems only)
+MATLAB: Ensure that you have MATLAB 2023b+ installed on your system.
+Widgets Toolbox for MATLAB App Designer Components: This toolbox is required to run CI LIFSplitter. 
+Download and install the Widgets Toolbox from [MathWorks File Exchange](https://nl.mathworks.com/matlabcentral/fileexchange/83328-widgets-toolbox-matlab-app-designer-components).
 
 ## Contributions
 
