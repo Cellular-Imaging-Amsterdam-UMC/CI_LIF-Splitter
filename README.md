@@ -1,25 +1,37 @@
 # CI LIF Splitter
 
-## Introduction
+## Version 1.2
 
-What to do with large or huge Leica LAS-X LIF files? Opening them can be a pain. With CI LIFSplitter, you can now split (i.e., extract) images to separate LIF files or optionally .QTIFF (RGB only) files.
+### Overview
 
-## Features
+*CI LIF Splitter* is a program designed to split images from multiple LIF, XLEF, or LOF files into separate LIF files or to convert 2D or 3D (maximum intensity projection) images to QPTIFF format (Akoya Biosciences®).
 
-- **Splitting LIF/XLEF Files**: Easily split large LIF or XLEF files into multiple smaller LIF files.
-- **Convert to .QTIFF**: Optionally convert 2D RGB images to .QTIFF Slide format. These files are saved with JPG compression and contain pyramids and a thumbnail. They are compatible with QuPath, AperioImageScope, Omero, Fiji (ImageJ), and even many more imaging programs when renamed to .tif.
+### Selecting Images
 
-## Usage
+1. Add (multiple) LIF, XLEF, or LOF files to the tree.
+2. Select (multiple) nodes to extract.
+3. Optionally, select the preview option from "None" (default) to "Ultra High Quality (slowest)".
+   - A small preview is shown with sliders for Tiles, Time, and 3D Z-slice sequences.
+   - For 3D sequences, there is a max projection toggle button.
+   - You can zoom in and out with your mouse wheel when hovering over the preview.
 
-1. **Add Files**: First, add one or more LIF/XLEF files to the tree.
-2. **Select Nodes**: Select one or more nodes to extract.
-3. **Split Files**: Click 'Split into separate LIF Files' to start the extraction process.
-4. **Convert RGB Images**: Optionally, check the 'Convert RGB Images to .QTIFF' box to convert 2D RGB images to .QTIFF format.
+### Operation for Splitting
 
-### Canceling and Error Handling
+1. Click "Split Selection..." to separate single images into separate LIF files.
+2. You can cancel the splitting process, and it will stop when the current splitting is done.
 
-- You can cancel the splitting process. It will stop once the current splitting is done.
-- If an error occurs, the GUI can be reset by clicking the 'R' button.
+### Operation for Converting to QPTIFF
+
+1. Optionally convert 2D RGB or 3D (maximum intensity projection) images to QPTIFF format.
+   - QPTIFF files contain both pyramids (downscaled versions of the original data) and a thumbnail.
+   - QPTIFF files with LZW compression contain the original data without loss or scaling.
+   - There is an option to scale 12-bit RGB images (from Leica MICA) to 8 bits for compatibility with QuPath.
+   - QPTIFF files with RGB compression are 8 bits. There is an option to do Global MinMax scaling for RGB images or per channel MinMax for multichannel images. The JPG quality can also be adjusted.
+   - QPTIFF files can be read by open-source programs such as QuPath, AperioImageScope, Omero, Fiji (ImageJ), and more, as well as commercial programs like HALO AI, PathAI, and others.
+2. Click "Split Selection..." to separate single images into separate QPTIFF files.
+   - Be aware, non-supported files (Tiles and Time Series) will be split to LIF.
+   - 3D images are converted to maximum projection 2D images.
+3. If an error occurs, the GUI can be reset by clicking the R button.
 
 ## Screenshot
 
@@ -27,7 +39,7 @@ What to do with large or huge Leica LAS-X LIF files? Opening them can be a pain.
 
 ## Version
 
-- **Version**: 1.1
+- **Version**: 1.2
 
 ## Author
 
