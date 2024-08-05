@@ -35,7 +35,7 @@
 
 ## Screenshot
 
-![CI LIF Splitter Interface](https://github.com/Cellular-Imaging-Amsterdam-UMC/CI_LIF-Splitter/blob/main/Schermafbeelding%202024-05-29%20152728.png)
+![CI LIF Splitter Interface](https://github.com/Cellular-Imaging-Amsterdam-UMC/CI_LIF-Splitter/blob/main/Screenshot05-08-2024.png)
 
 ## Version
 
