@@ -68,7 +68,7 @@ Download and install the Widgets Toolbox from [MathWorks File Exchange](https://
 
 ## Contributions
 
-Contributions are welcome. Please follow the guidelines outlined in the CONTRIBUTING.md file in the repository.
+Contributions, Question and Test Files are welcome.
 
 ---
 
