@@ -12,8 +12,12 @@ function beautifiedSize = cfBytesString(bytes)
     end
     
     % Convert the bytes to the selected unit
-    convertedValue = bytes / units(index);
+    if index==0
+        convertedValue = 0;
+        beautifiedSize = sprintf('%.2f %s', convertedValue, unitLabels{1});
+    else
+        convertedValue = bytes / units(index);
+        beautifiedSize = sprintf('%.2f %s', convertedValue, unitLabels{index});
+    end
     
-    % Format the result with two decimal places and append the unit label
-    beautifiedSize = sprintf('%.2f %s', convertedValue, unitLabels{index});
 end

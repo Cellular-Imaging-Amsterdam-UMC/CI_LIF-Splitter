@@ -1,0 +1,168 @@
+<deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
+  <configuration build-checksum="3467428701" file="C:\Users\p000881\OneDrive - Amsterdam UMC\Documenten\MATLAB\CI-LIF_Splitter 1.2 (2023b sp8)\CILIFSplitter.prj" location="C:\Users\p000881\OneDrive - Amsterdam UMC\Documenten\MATLAB\CI-LIF_Splitter 1.2 (2023b sp8)" name="CILIFSplitter" preferred-package-location="C:\Users\p000881\OneDrive - Amsterdam UMC\Documenten\MATLAB\CI-LIF_Splitter 1.2 (2023b sp8)\CILIFSplitter\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+    <param.appname>CILIFSplitter</param.appname>
+    <param.icon>${PROJECT_ROOT}\CILIFSplitter_resources\icon.ico</param.icon>
+    <param.icons>
+      <file>${PROJECT_ROOT}\CILIFSplitter_resources\icon_48.png</file>
+      <file>${PROJECT_ROOT}\CILIFSplitter_resources\icon_32.png</file>
+      <file>${PROJECT_ROOT}\CILIFSplitter_resources\icon_24.png</file>
+      <file>${PROJECT_ROOT}\CILIFSplitter_resources\icon_16.png</file>
+    </param.icons>
+    <param.version>1.2</param.version>
+    <param.authnamewatermark>Ron Hoebe</param.authnamewatermark>
+    <param.email>r.a.hoebe@amsterdamumc.nl</param.email>
+    <param.company>Amsterdam UMC, location AMC</param.company>
+    <param.summary>Splits Leica LIF/XLEF/LOF files to separate LIF Files and/or Converts to QPTIFF</param.summary>
+    <param.description />
+    <param.screenshot>${PROJECT_ROOT}\LIFSplitterSplash400x400.png</param.screenshot>
+    <param.guid />
+    <param.installpath.string>\Amsterdam UMC, location AMC\CILIFSplitter\</param.installpath.string>
+    <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
+    <param.logo />
+    <param.install.notes />
+    <param.target.install.notes />
+    <param.intermediate>${PROJECT_ROOT}\CILIFSplitter\for_testing</param.intermediate>
+    <param.files.only>${PROJECT_ROOT}\CILIFSplitter\for_redistribution_files_only</param.files.only>
+    <param.output>${PROJECT_ROOT}\CILIFSplitter\for_redistribution</param.output>
+    <param.logdir>${PROJECT_ROOT}\CILIFSplitter</param.logdir>
+    <param.enable.clean.build>false</param.enable.clean.build>
+    <param.user.defined.mcr.options />
+    <param.target.type>subtarget.standalone</param.target.type>
+    <param.support.packages />
+    <param.web.mcr>true</param.web.mcr>
+    <param.package.mcr>false</param.package.mcr>
+    <param.no.mcr>false</param.no.mcr>
+    <param.web.mcr.name>CILIFSplitterInstaller12</param.web.mcr.name>
+    <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
+    <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
+    <param.windows.command.prompt>true</param.windows.command.prompt>
+    <param.create.log>false</param.create.log>
+    <param.log.file />
+    <param.native.matlab>false</param.native.matlab>
+    <param.checkbox>false</param.checkbox>
+    <param.example />
+    <param.help.text>Syntax 
+	  -? 
+	 
+ Input Arguments 
+	 -?  print help on how to use the application 
+	 input arguments</param.help.text>
+    <unset>
+      <param.description />
+      <param.guid />
+      <param.installpath.string />
+      <param.installpath.combo />
+      <param.logo />
+      <param.install.notes />
+      <param.target.install.notes />
+      <param.intermediate />
+      <param.files.only />
+      <param.output />
+      <param.logdir />
+      <param.enable.clean.build />
+      <param.user.defined.mcr.options />
+      <param.target.type />
+      <param.support.packages />
+      <param.web.mcr />
+      <param.package.mcr />
+      <param.no.mcr />
+      <param.package.mcr.name />
+      <param.no.mcr.name />
+      <param.windows.command.prompt />
+      <param.create.log />
+      <param.log.file />
+      <param.native.matlab />
+      <param.checkbox />
+      <param.example />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\CI_LIF_Splitter.mlapp</file>
+    </fileset.main>
+    <fileset.resources>
+      <file>${PROJECT_ROOT}\About.html</file>
+      <file>${PROJECT_ROOT}\Collapse.png</file>
+      <file>${PROJECT_ROOT}\eventlist.png</file>
+      <file>${PROJECT_ROOT}\Expand.png</file>
+      <file>${PROJECT_ROOT}\find.png</file>
+      <file>${PROJECT_ROOT}\folder.png</file>
+      <file>${PROJECT_ROOT}\image.png</file>
+      <file>${PROJECT_ROOT}\images-stack.png</file>
+      <file>${PROJECT_ROOT}\LAS-X.png</file>
+      <file>${PROJECT_ROOT}\min.png</file>
+      <file>${PROJECT_ROOT}\pictures-stack.png</file>
+      <file>${PROJECT_ROOT}\plus.png</file>
+      <file>${PROJECT_ROOT}\plus2.png</file>
+      <file>${PROJECT_ROOT}\Save.png</file>
+      <file>${PROJECT_ROOT}\SetDefault.png</file>
+    </fileset.resources>
+    <fileset.package>
+      <file>${PROJECT_ROOT}\About.html</file>
+    </fileset.package>
+    <fileset.depfun>
+      <file>C:\Users\p000881\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\Widgets Toolbox - MATLAB App Designer Components\+wt\+eventdata\ButtonPushedData.m</file>
+      <file>C:\Users\p000881\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\Widgets Toolbox - MATLAB App Designer Components\+wt\+mixin\BackgroundColorable.m</file>
+      <file>C:\Users\p000881\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\Widgets Toolbox - MATLAB App Designer Components\+wt\+mixin\FontStyled.m</file>
+      <file>C:\Users\p000881\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\Widgets Toolbox - MATLAB App Designer Components\+wt\+mixin\PropertyViewable.m</file>
+      <file>C:\Users\p000881\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\Widgets Toolbox - MATLAB App Designer Components\+wt\+utility\fastSet.m</file>
+      <file>C:\Users\p000881\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\Widgets Toolbox - MATLAB App Designer Components\+wt\+utility\setStylePropsInPriority.m</file>
+      <file>C:\Users\p000881\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\Widgets Toolbox - MATLAB App Designer Components\+wt\+validators\mustBeBetween.m</file>
+      <file>C:\Users\p000881\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\Widgets Toolbox - MATLAB App Designer Components\+wt\+validators\mustBeBetweenZeroAndOne.m</file>
+      <file>C:\Users\p000881\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\Widgets Toolbox - MATLAB App Designer Components\+wt\ProgressBar.m</file>
+      <file>${PROJECT_ROOT}\+LIFsplit\cfCreatePreviewMultiChannel.m</file>
+      <file>${PROJECT_ROOT}\+LIFsplit\cfCreatePreviewRGB.m</file>
+      <file>${PROJECT_ROOT}\+LIFsplit\cfProcessLIFSplit.m</file>
+      <file>${PROJECT_ROOT}\+LIFsplit\cfSave2LIF.m</file>
+      <file>${PROJECT_ROOT}\+LIFsplit\cfSave2QPTIFFMultiChannel.m</file>
+      <file>${PROJECT_ROOT}\+LIFsplit\cfSave2QPTIFFRGB.m</file>
+      <file>${PROJECT_ROOT}\Cancel (2).png</file>
+      <file>${PROJECT_ROOT}\cfBytesString.m</file>
+      <file>${PROJECT_ROOT}\cfCopyMemBlock.m</file>
+      <file>${PROJECT_ROOT}\cfExtractElementContents.m</file>
+      <file>${PROJECT_ROOT}\cfGetimIcon.m</file>
+      <file>${PROJECT_ROOT}\cfKeepLastOne.m</file>
+      <file>${PROJECT_ROOT}\cfReadLOFInfo.m</file>
+      <file>${PROJECT_ROOT}\cfReadMetaData.m</file>
+      <file>${PROJECT_ROOT}\cfStructSearch.m</file>
+      <file>${PROJECT_ROOT}\cfUnicode2ascii.m</file>
+      <file>${PROJECT_ROOT}\Help symbol -bw.png</file>
+      <file>${PROJECT_ROOT}\help.mlapp</file>
+      <file>${PROJECT_ROOT}\LIFSplittericon48x48.png</file>
+      <file>${PROJECT_ROOT}\tree--plus.png</file>
+      <file>${PROJECT_ROOT}\UUID.m</file>
+      <file>${PROJECT_ROOT}\xml2struct.mexw64</file>
+      <file>${PROJECT_ROOT}\xml2structstring.mexw64</file>
+    </fileset.depfun>
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}\CILIFSplitter\for_testing" name="CILIFSplitter.exe" optional="false">C:\Users\p000881\OneDrive - Amsterdam UMC\Documenten\MATLAB\CI-LIF_Splitter 1.2 (2023b sp8)\CILIFSplitter\for_testing\CILIFSplitter.exe</file>
+      <file location="${PROJECT_ROOT}\CILIFSplitter\for_testing" name="splash.png" optional="false">C:\Users\p000881\OneDrive - Amsterdam UMC\Documenten\MATLAB\CI-LIF_Splitter 1.2 (2023b sp8)\CILIFSplitter\for_testing\splash.png</file>
+      <file location="${PROJECT_ROOT}\CILIFSplitter\for_testing" name="readme.txt" optional="true">C:\Users\p000881\OneDrive - Amsterdam UMC\Documenten\MATLAB\CI-LIF_Splitter 1.2 (2023b sp8)\CILIFSplitter\for_testing\readme.txt</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2023b</root>
+      <toolboxes>
+        <toolbox name="neuralnetwork" />
+      </toolboxes>
+      <toolbox>
+        <neuralnetwork>
+          <enabled>true</enabled>
+        </neuralnetwork>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>

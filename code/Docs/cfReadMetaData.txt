@@ -1,13 +1,11 @@
 function [result, serror, iminfo] = cfReadMetaData(lifinfo)
-    import java.io.StringReader;
-    import org.xml.sax.InputSource;
     %Reading MetaData (Leica LAS-X)
-    if strcmpi(lifinfo.datatype,'Image') || strcmpi(lifinfo.datatype,'ImageFile')
-        iminfo.xs=1;                     % imwidth
+    if strcmpi(lifinfo.datatype,'image')
+        iminfo.xs=0;                     % imwidth
         iminfo.xbytesinc=0;
-        iminfo.ys=1;                     % imheight
+        iminfo.ys=0;                     % imheight
         iminfo.ybytesinc=0;
-        iminfo.zs=1;                     % slices (stack)
+        iminfo.zs=0;                     % slices (stack)
         iminfo.zbytesinc=0;
         iminfo.ts=1;                     % time
         iminfo.tbytesinc=0;
@@ -42,6 +40,8 @@ function [result, serror, iminfo] = cfReadMetaData(lifinfo)
         iminfo.na=0;
         iminfo.refractiveindex=0;
         iminfo.pinholeradius=250;
+%         iminfo.deconfileexists=false;
+%         iminfo.deconfileinfo=struct;
         iminfo.flipx=0;
         iminfo.flipy=0;
         iminfo.swapxy=0;
@@ -232,6 +232,7 @@ function [result, serror, iminfo] = cfReadMetaData(lifinfo)
             iminfo.swapxy=str2double(cfStructSearch(xmlInfo,'SwapXY'));
         end
         
+        
         %Mic Type
         if isfield(lifinfo.Image,'Attachment')
             xmlInfo = lifinfo.Image.Attachment;
@@ -352,54 +353,6 @@ function [result, serror, iminfo] = cfReadMetaData(lifinfo)
                     iminfo.excitation(k)=590;
                     iminfo.emission(k)=700;
                 end
-            end
-        end
-
-        if contains(xli.Attributes.SystemTypeName,'STELLARIS')
-            chinfo=lifinfo.Image.ImageDescription.Channels(1).ChannelDescription;
-            for ch=1:iminfo.channels
-                for cd=1:numel(chinfo{ch}.ChannelProperty)
-                    if strcmpi(strtrim(chinfo{ch}.ChannelProperty{cd}.Key.Text),'DyeName')
-                        iminfo.filterblock{ch}=strtrim(chinfo{ch}.ChannelProperty{cd}.Value.Text);
-                        break;
-                    end
-                end
-            end
-        end
-
-        if strcmpi(iminfo.filterblock(1),'MICA_WF')
-            % Parse the XML string
-            stringReader = StringReader(lifinfo.xmlElement);
-            inputSource = InputSource(stringReader);            
-            xmlData = xmlread(inputSource);
-        
-            % Get all Structure elements
-            structures = xmlData.getElementsByTagName('Structure');
-        
-            % Loop through each Structure element
-            for i = 0:structures.getLength-1
-                structure = structures.item(i);
-                
-                % Get the Name element
-                nameElement = structure.getElementsByTagName('Name').item(0);
-                name = char(nameElement.getTextContent());
-                
-                % Get the LutName element
-                lutNameElement = structure.getElementsByTagName('LutName').item(0);
-                lutName = char(lutNameElement.getTextContent());
-                
-                % Get the EmissionWavelength element
-                emissionWavelengthElement = structure.getElementsByTagName('EmissionWavelength').item(0);
-                emissionWavelength = char(emissionWavelengthElement.getTextContent());
-                
-                % Get the ExcitationWavelength element
-                excitationWavelengthElement = structure.getElementsByTagName('ExcitationWavelength').item(0);
-                excitationWavelength = char(excitationWavelengthElement.getTextContent());
-                
-                iminfo.excitation(i+1)=str2double(emissionWavelength);
-                iminfo.emission(i+1)=str2double(excitationWavelength);
-                iminfo.lutname{i+1}=lutName;
-                iminfo.filterblock{i+1}=name;
             end
         end
 

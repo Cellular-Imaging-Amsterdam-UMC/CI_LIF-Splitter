@@ -1,10 +1,10 @@
 function cfCopyMemBlock(app, lifinfo, fidw)
 
     % Determine the correct file and position based on filetype
-    if strcmpi(lifinfo.filetype, ".lif")
+    if strcmpi(lifinfo.filetype, '.lif')
         fid = fopen(lifinfo.LIFFile, 'r', 'n', 'UTF-8');
         p = lifinfo.Position;
-    elseif strcmpi(lifinfo.filetype, ".xlef")
+    elseif strcmpi(lifinfo.filetype, '.xlef') || strcmpi(lifinfo.filetype, '.lof')
         fid = fopen(lifinfo.LOFFile, 'r', 'n', 'UTF-8');
         %4+4+1+4+30(LMS_Object_File=2*15)+1+4+1+4+1+8 = 62
         p = 62;
@@ -50,7 +50,7 @@ function cfCopyMemBlock(app, lifinfo, fidw)
     app.setProgress2(0, '')
 
     % Close the file
-    fclose(fid);
+    % fclose(fid);
 
     function nUpdateWaitbar2(~)
         numComplete2 = numComplete2 + 1;

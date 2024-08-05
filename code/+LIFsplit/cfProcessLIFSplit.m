@@ -14,18 +14,29 @@ function cfProcessLIFSplit(app)
         for i=1:numel(selectedNodes)
             lifinfo=selectedNodes(i).NodeData{2};
             [~, ~, iminfo]=cfReadMetaData(lifinfo);
-            if strcmpi(selectedNodes(i).Tag,'Image')
+            if strcmpi(selectedNodes(i).Tag,'Image') || strcmpi(selectedNodes(i).Tag,'ImageFile')
+                if app.PreviewDropDown.Value>0 
+                    app.ShowPreview(lifinfo, iminfo);
+                end
                 if strcmpi(lifinfo.filetype,'.xlef')
                     [lifmap,lifname,~]=fileparts(lifinfo.XLEFFile);
+                elseif strcmpi(lifinfo.filetype,'.lof')
+                    [lifmap,lifname,~]=fileparts(lifinfo.LOFFile);
                 else
                     [lifmap,lifname,~]=fileparts(lifinfo.LIFFile);
                 end
-                if iminfo.isrgb && iminfo.zs==1 && iminfo.ts==1 && iminfo.tiles==1 && iminfo.channels==3 && app.ConvertRGBImagestoSVSCheckBox.Value
+                if iminfo.isrgb && iminfo.zs==1 && iminfo.ts==1 && iminfo.tiles==1 && iminfo.channels==3 && app.ConvertToQTIFFCheckBox.Value
                     app.setLog(['Splitting of: ' lifinfo.name])
-                    % Filename=[lifmap '\' lifname '_' lifinfo.Parent '_' lifinfo.name '.svs'];
-                    % LIFsplit.cfSave2SVS(app, Filename,lifinfo)
                     Filename=[lifmap '\' lifname '_' lifinfo.Parent '_' lifinfo.name '.qptiff'];
-                    LIFsplit.cfSave2QPTIFF(app, Filename,lifinfo)                    
+                    LIFsplit.cfSave2QPTIFFRGB(app, Filename,lifinfo)                    
+                elseif ~iminfo.isrgb && iminfo.ts==1 && iminfo.tiles==1 && app.ConvertToQTIFFCheckBox.Value
+                    app.setLog(['Splitting of: ' lifinfo.name])
+                    Filename=[lifmap '\' lifname '_' lifinfo.Parent '_' lifinfo.name '.qptiff'];
+                    LIFsplit.cfSave2QPTIFFMultiChannel(app, Filename,lifinfo)                    
+                elseif strcmpi(lifinfo.filetype,'.lof')
+                    app.setLog(['Splitting of: ' lifinfo.name])
+                    Filename=[lifmap '\' lifname '.lif'];
+                    LIFsplit.cfSave2LIF(app, Filename,lifinfo)
                 else
                     app.setLog(['Splitting of: ' lifinfo.name])
                     Filename=[lifmap '\' lifname '_' lifinfo.Parent '_' lifinfo.name '.lif'];

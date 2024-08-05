@@ -1,11 +1,11 @@
 function cfSave2LIF(app, sfileout,lifinfo)
 
     isLIF=strcmpi(lifinfo.filetype,'.lif');
-    isXLEF=strcmpi(lifinfo.filetype,'.xlef');
+    isXLEF=strcmpi(lifinfo.filetype,'.xlef') || strcmpi(lifinfo.filetype,'.lof');
 
     [~, fname, ext]=fileparts(sfileout);
 
-    outxml='<LMSDataContainerHeader Version="2"><Element CopyOption="1" Name="%name%" UniqueID="%uuid%" Visibility="1"> <Data><Experiment IsSavedFlag="1" Path="%path%"/></Data><Memory MemoryBlockID="MemBlock_21" Size="0"/><Children>%element%</Children></Element></LMSDataContainerHeader>';
+    outxml='<LMSDataContainerHeader Version="2"><Element CopyOption="1" Name="%name%" UniqueID="%uuid%" Visibility="1"> <Data><Experiment IsSavedFlag="1" Path="%path%"/></Data><Memory MemoryBlockID="MemBlock_221" Size="0"/><Children>%element%</Children></Element></LMSDataContainerHeader>';
     outxml=replace(outxml,'%name%',[fname ext]);
     outxml=replace(outxml,'%path%',sfileout);
     if isXLEF
@@ -28,6 +28,9 @@ function cfSave2LIF(app, sfileout,lifinfo)
 
     %Remove line breaks
     outxml=strrep(outxml,newline,'');
+
+    %Remove strange chars that are not correctly read (like °) 
+    %outxml(outxml > 127)='_';
     
     %Remove al whitespace
     outxml=regexprep(outxml,' +',' ');
@@ -42,22 +45,22 @@ function cfSave2LIF(app, sfileout,lifinfo)
     % fclose(fidx);
 
     %Add zeros (UTF-8 -> UTF-16)
-    outxml16=addzeros(outxml);
+    outxml16=unicode2native(outxml,'UTF-16');
 
     %Write to file
     fid = fopen(sfileout,'w');
 
     %Binary Header
     fwrite(fid,hex2dec('70'),'uint32'); % 0x70 test value
-    fwrite(fid,length(outxml16)+1+4,'uint32'); % Binary chunk lenght NC*2 + 1 + 4
+    fwrite(fid,length(outxml16(3:end))+1+4,'uint32'); % Binary chunk lenght NC*2 + 1 + 4
     fwrite(fid,hex2dec('2A'),'uint8'); % 0x2A test value
-    fwrite(fid,length(outxml16)/2,'uint32'); % Number of UTF-16 Characters (NC)
+    fwrite(fid,length(outxml16(3:end))/2,'uint32'); % Number of UTF-16 Characters (NC)
 
     %XML Header
-    fwrite(fid,outxml16);
+    fwrite(fid,outxml16(3:end));
 
-    %MemBlock_21
-    mdescription=addzeros('MemBlock_21');
+    % %MemBlock_221
+    mdescription=addzeros('MemBlock_221');
     msize=0;
     fwrite(fid,hex2dec('70'),'uint32'); % 0x70 test value
     fwrite(fid,length(mdescription)+1+8+1+4,'uint32'); % Binary chunk lenght NC*2 + 1 + 8 + 1 + 4
@@ -74,7 +77,7 @@ function cfSave2LIF(app, sfileout,lifinfo)
     mdescription=addzeros(['MemBlock_' elementMemID]);
     msize=lifinfo.MemorySize;
     fwrite(fid,hex2dec('70'),'uint32'); % 0x70 test value
-    fwrite(fid,length(mdescription)+1+8+1+4,'*uint32'); % Binary chunk lenght NC*2 + 1 + 8 + 1 + 4
+    fwrite(fid,length(mdescription)+1+8+1+4,'uint32'); % Binary chunk lenght NC*2 + 1 + 8 + 1 + 4
     fwrite(fid,hex2dec('2A'),'uint8'); % 0x2A test value
     fwrite(fid,msize,'uint64'); % Size of Memory
     fwrite(fid,hex2dec('2A'),'uint8'); % 0x2A test value
@@ -84,7 +87,7 @@ function cfSave2LIF(app, sfileout,lifinfo)
     %Memory
     cfCopyMemBlock(app,lifinfo,fid);
 
-    app.setLog(['Created LIF: ' fname ext '.lif'] )
+    app.setLog(['Created LIF: ' fname ext] )
 
     %Close file
     fclose(fid);

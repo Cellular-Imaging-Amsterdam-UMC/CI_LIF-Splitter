@@ -1,0 +1,68 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration file="C:\Users\p000881\OneDrive - Amsterdam UMC\Documenten\MATLAB\CI-LIF_Splitter 1.1 (2023b sp8)\CI LIF Splitter.prj" location="C:\Users\p000881\OneDrive - Amsterdam UMC\Documenten\MATLAB\CI-LIF_Splitter 1.1 (2023b sp8)" name="CI LIF Splitter" target="target.mlapps" target-name="Package App">
+    <param.appname>CI LIF Splitter</param.appname>
+    <param.authnamewatermark>Ron Hoebe</param.authnamewatermark>
+    <param.email />
+    <param.company />
+    <param.icon />
+    <param.icons />
+    <param.summary>Splits Leica LIF/XLEF files seperate LIF Files</param.summary>
+    <param.description />
+    <param.screenshot>C:\Users\p000881\AppData\Local\Temp\tp160cb0ab_0e28_4837_853b_d5d09c714703.png</param.screenshot>
+    <param.version>1.1</param.version>
+    <param.products.name />
+    <param.products.id />
+    <param.products.version />
+    <param.platforms />
+    <param.output>${PROJECT_ROOT}</param.output>
+    <param.guid>67976aff-c767-41f8-9ee1-d302e6d37310</param.guid>
+    <unset>
+      <param.email />
+      <param.company />
+      <param.icon />
+      <param.icons />
+      <param.description />
+      <param.products.name />
+      <param.products.id />
+      <param.products.version />
+      <param.platforms />
+      <param.output />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\CI_LIF_Splitter.mlapp</file>
+    </fileset.main>
+    <fileset.depfun />
+    <fileset.resources />
+    <fileset.package />
+    <build-deliverables>
+      <file location="C:\Users\p000881\OneDrive - Amsterdam UMC\Documenten\MATLAB" name="CI-LIF_Splitter 1.1 (2023b sp8)" optional="false">C:\Users\p000881\OneDrive - Amsterdam UMC\Documenten\MATLAB\CI-LIF_Splitter 1.1 (2023b sp8)</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2023b</root>
+      <toolboxes>
+        <toolbox name="neuralnetwork" />
+      </toolboxes>
+      <toolbox>
+        <neuralnetwork>
+          <enabled>true</enabled>
+        </neuralnetwork>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>

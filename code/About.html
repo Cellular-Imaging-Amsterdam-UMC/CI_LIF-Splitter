@@ -1,26 +1,35 @@
-﻿<p>
-<strong><font size=+1>About CI LIF Splitter</font></strong>
+﻿<h1>About CI LIF Splitter</h1>
+<p>
+<i>This program can split images from multiple LIF,XLEF or LIF into multiple LIF Files, or can convert 2D or 3D (maximum intensity projection) images to QPTIFF format (Akoya Biosciences®)</i>
+</p>
+<h2>Selecting Images</h2>
+<p>
+    Add (multiple) LIF, XLEF or LOF to the tree. Then Select (multiple) nodes to extract. Optionally you can select the preview option from "None" (default) to "Ultra High Quality (slowest)". A small preview is shown with sliders for Tiles, Time and 3D Z-slice sequences. For 3D sequences there is also a max projection toggle button. You can zoom in and out with your mousewheel when hovering over the preview.
+</p>
+<h2>Operation for Splitting</h2>
+<p>
+    Click "Split Selection..." to separate the single images to separate LIF Files.
+    You can cancel the splitting. It will stop when the current splitting is done.
+</p>
+<h2>Operation for Converting to QPTIFF</h2>
+<p>
+    Optionally 2D RGB or or 3D (maximum intensity projection) images can be converted to QPTIFF format.
+    QTIFF Files contain both pyramids (downscaled versions of the original data) and a thumbnail.
+    QTIFF Files with LZW compression contain the original data without loss or scaling. There is an option to scale 12 bits RGB images (from Leica MICA), to 8 bits to make the more compatible with QuPath.
+    QTIFF Files with RGB compression are 8 bits, here there is en option to do Global MinMax scaling for RGB images per channel MinMax for Multichannel images. The JPG Quality can also be changed.
+    QTIFF Files can be read by Open-Source Programs: QuPath, AperioImageScope, Omero, Fiji(ImageJ) and more. And Commercial Programs: HALO AI, PathAI and more.
 </p>
 <p>
-<i>Splits LIF/XLEF into multiple LIF Files.</i>
+    Click "Split Selection..." to separate the single images to separate QTIFF Files.
+    Be aware, non supported files (Tiles and Time Series) will be Split to LIF. And 3D images are converted to maximum projection 2D images.
 </p>
 <p>
-    First add (multiple) LIF/XLEF to the tree. Then Select (multiple) nodes to extract. Click Split into separate LIF Files.
-    <br>
-    Optionally 2D RGB images can be converted to .qptiff Slide format. These files are saved with JPG compression and contain pyramids and a thumbnail.
-    These files can be read by QuPath, AperioImageScope, Omero, Fiji(ImageJ). And even (when renamed to .tif, sometimes) by many more imaging programs.
-</p>
-<p>
-    You can cancel the splitting. It will stop when the current splitting is done. When an error occurs the GUI can be reset by clicking the R button.
+    When an error occurs the GUI can be reset by clicking the R button.
 </p>
 <copy>
     <p>
-        <strong>Version 1.1</strong>
-    <br>
-        <strong>Author: </strong> <a href="mailto:r.a.hoebe@amsterdamumc.nl">Ron Hoebe</a>
-    <br>
+        <strong>Version 1.2</strong>
+        <strong>Author: </strong>Ron Hoebe
         <strong>License: </strong> MIT
-    <br>
-        <strong>Source: </strong> <a href="https://software.cellularimaging.nl">https://software.cellularimaging.nl</a>
     </p>
 </copy>

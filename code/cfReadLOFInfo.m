@@ -24,16 +24,38 @@ function [MemorySize, xmlElement] = cfReadLOFInfo(lifinfo)
         testvalue=fread(fileID,1,'uint8');    
         if testvalue~=42; return; end 
         testvalue=fread(fileID,1,'uint32');
-        XMLObjDescriptionUTF16=reshape(fread(fileID,2*testvalue,'*char'),1,testvalue*2);
-        XMLObjDescription=cfUnicode2ascii(XMLObjDescriptionUTF16);
-        %XMLObjDescription=regexprep(XMLObjDescription,'</',[newline '</']);
-        %xmlElement=cfExtractElementContentsLOF(XMLObjDescription);
-        %xmlElement=xmlElement{1};
-        xmlElement=XMLObjDescription;
+
+        XMLObjDescriptionUTF16=fread(fileID,testvalue,'uint16');
+        XMLObjDescription=char(XMLObjDescriptionUTF16)';        
+        
+        % XMLObjDescriptionUTF16=reshape(fread(fileID,2*testvalue,'*char'),1,testvalue*2);
+        % XMLObjDescription=cfUnicode2ascii(XMLObjDescriptionUTF16);
+        % %XMLObjDescription=regexprep(XMLObjDescription,'</',[newline '</']);
+        % %xmlElement=cfExtractElementContentsLOF(XMLObjDescription);
+        % %xmlElement=xmlElement{1};
+
+        if strcmpi(XMLObjDescription(1:4),'<LMS')
+            xmlElement=ExtractData(XMLObjDescription);
+        else
+            xmlElement=XMLObjDescription;
+        end
         fclose(fileID);
     catch
         xmlElement='';
         MemorySize=0;
+    end
+end
+
+function dataContent=ExtractData(xmlContent)
+    % Extract the first <Data> and the last </Data> part
+    dataStart = strfind(xmlContent, '<Data>');
+    dataEnd = strfind(xmlContent, '</Data>');
+    
+    if ~isempty(dataStart) && ~isempty(dataEnd)
+        % Get the first occurrence of <Data> and the last occurrence of </Data>
+        dataContent = xmlContent(dataStart(1):dataEnd(end) + length('</Data>') - 1);
+    else
+        error('The <Data>...</Data> section was not found in the XML file.');
     end
 end
 
