@@ -367,7 +367,7 @@ function [result, serror, iminfo] = cfReadMetaData(lifinfo)
             end
         end
 
-        if strcmpi(iminfo.filterblock(1),'MICA_WF')
+        if strcmpi(iminfo.filterblock(1), 'MICA_WF')
             % Parse the XML string
             stringReader = StringReader(lifinfo.xmlElement);
             inputSource = InputSource(stringReader);            
@@ -376,30 +376,86 @@ function [result, serror, iminfo] = cfReadMetaData(lifinfo)
             % Get all Structure elements
             structures = xmlData.getElementsByTagName('Structure');
         
-            % Loop through each Structure element
+            % Initialize a container for structure names and their corresponding LUT names
+            structureData = containers.Map;
+            structureLUTs = containers.Map('KeyType', 'char', 'ValueType', 'int32');
+        
+            % Loop through each Structure element to get the Name, LutName, EmissionWavelength, and ExcitationWavelength
             for i = 0:structures.getLength-1
                 structure = structures.item(i);
-                
+        
                 % Get the Name element
                 nameElement = structure.getElementsByTagName('Name').item(0);
-                name = char(nameElement.getTextContent());
-                
+                structureName = char(nameElement.getTextContent());
+        
                 % Get the LutName element
                 lutNameElement = structure.getElementsByTagName('LutName').item(0);
                 lutName = char(lutNameElement.getTextContent());
-                
+        
                 % Get the EmissionWavelength element
                 emissionWavelengthElement = structure.getElementsByTagName('EmissionWavelength').item(0);
                 emissionWavelength = char(emissionWavelengthElement.getTextContent());
-                
+        
                 % Get the ExcitationWavelength element
                 excitationWavelengthElement = structure.getElementsByTagName('ExcitationWavelength').item(0);
                 excitationWavelength = char(excitationWavelengthElement.getTextContent());
-                
-                iminfo.excitation(i+1)=str2double(emissionWavelength);
-                iminfo.emission(i+1)=str2double(excitationWavelength);
-                iminfo.lutname{i+1}=lutName;
-                iminfo.filterblock{i+1}=name;
+        
+                % Store the structure data
+                structureData(lutName) = struct('Name', structureName, 'EmissionWavelength', emissionWavelength, 'ExcitationWavelength', excitationWavelength);
+        
+                if isKey(structureLUTs, lutName)
+                    structureLUTs(lutName) = structureLUTs(lutName) + 1;
+                else
+                    structureLUTs(lutName) = 1;
+                end
+            end
+        
+            % Check if all LUT names are unique
+            allUnique = true;
+            lutNames = keys(structureLUTs);
+            for i = 1:length(lutNames)
+                if structureLUTs(lutNames{i}) > 1
+                    allUnique = false;
+                    break;
+                end
+            end
+        
+            % Get all ChannelDescription elements
+            channels = xmlData.getElementsByTagName('ChannelDescription');
+        
+            % Loop through each ChannelDescription element
+            for i = 0:channels.getLength-1
+                channel = channels.item(i);
+        
+                % Get the LUTName attribute
+                lutName = char(channel.getAttribute('LUTName'));
+        
+                % Check if all LUT names are unique
+                if ~allUnique
+                    % If not all LUT names are unique, set the numerical data to 0 and text data to ''
+                    iminfo.excitation(i+1) = 0;
+                    iminfo.emission(i+1) = 0;
+                    iminfo.lutname{i+1} = '';
+                    iminfo.filterblock{i+1} = '';
+                else
+                    % Find the corresponding structure data using the LUTName
+                    if isKey(structureData, lutName)
+                        structureInfo = structureData(lutName);
+                        structureName = structureInfo.Name;
+                        emissionWavelength = str2double(structureInfo.EmissionWavelength);
+                        excitationWavelength = str2double(structureInfo.ExcitationWavelength);
+                    else
+                        structureName = 'Unknown';
+                        emissionWavelength = 0;
+                        excitationWavelength = 0;
+                    end
+        
+                    % Store the extracted information
+                    iminfo.excitation(i+1) = excitationWavelength;
+                    iminfo.emission(i+1) = emissionWavelength;
+                    iminfo.lutname{i+1} = lutName;
+                    iminfo.filterblock{i+1} = structureName;
+                end
             end
         end
 

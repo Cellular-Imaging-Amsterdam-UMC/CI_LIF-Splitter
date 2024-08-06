@@ -1,6 +1,6 @@
 # CI LIF Splitter
 
-## Version 1.2
+## Version 1.21
 
 ### Overview
 
@@ -39,7 +39,7 @@
 
 ## Version
 
-- **Version**: 1.2
+- **Version**: 1.21
 
 ## Author
 
