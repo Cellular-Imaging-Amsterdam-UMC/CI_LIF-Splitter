@@ -354,14 +354,16 @@ function [result, serror, iminfo] = cfReadMetaData(lifinfo)
                 end
             end
         end
-
-        if contains(xli.Attributes.SystemTypeName,'STELLARIS')
-            chinfo=lifinfo.Image.ImageDescription.Channels(1).ChannelDescription;
-            for ch=1:iminfo.channels
-                for cd=1:numel(chinfo{ch}.ChannelProperty)
-                    if strcmpi(strtrim(chinfo{ch}.ChannelProperty{cd}.Key.Text),'DyeName')
-                        iminfo.filterblock{ch}=strtrim(chinfo{ch}.ChannelProperty{cd}.Value.Text);
-                        break;
+        
+        if isfield(xli.Attributes,'SystemTypeName')
+            if contains(xli.Attributes.SystemTypeName,'STELLARIS')
+                chinfo=lifinfo.Image.ImageDescription.Channels(1).ChannelDescription;
+                for ch=1:iminfo.channels
+                    for cd=1:numel(chinfo{ch}.ChannelProperty)
+                        if strcmpi(strtrim(chinfo{ch}.ChannelProperty{cd}.Key.Text),'DyeName')
+                            iminfo.filterblock{ch}=strtrim(chinfo{ch}.ChannelProperty{cd}.Value.Text);
+                            break;
+                        end
                     end
                 end
             end
@@ -494,7 +496,6 @@ function [result, serror, iminfo] = cfReadMetaData(lifinfo)
         iminfo.Gain=str2double(lifinfo.GISTEventList.GISTEventListDescription.LocalizationParameters.Attributes.Gain);
         iminfo.FieldOfViewX=str2double(lifinfo.GISTEventList.GISTEventListDescription.LocalizationParameters.Attributes.FieldOfViewX2);
         iminfo.FieldOfViewY=str2double(lifinfo.GISTEventList.GISTEventListDescription.LocalizationParameters.Attributes.FieldOfViewY2);
-        %s=cfXML2struct(cfXMLReadString(['<?xml version="1.0" encoding="ISO-8859-1"?>' lifinfo.GISTEventList.GISTEventListDescription.DataAnalysis.Attributes.XML3DCalibration]));
         serror='';  
         result=true;
     end
